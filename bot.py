@@ -828,7 +828,7 @@ class Tomartod:
         use_proxy = True if len(proxies) > 0 else False
         self.log(f"{hijau}use proxy : {putih}{use_proxy}")
         print(line)
-        while True:
+        # while True:
             # list_countdown = []
             # _start = int(time.time())
             total_balance = 0
