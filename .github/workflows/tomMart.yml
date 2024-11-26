@@ -1,0 +1,36 @@
+name: tomart
+
+on:
+  schedule:
+    - cron: "*/60 * * * *" # Runs every 60 minutes
+  workflow_dispatch: # Allows manual run of the workflow
+
+concurrency:
+  group: tomart
+  cancel-in-progress: true
+  
+jobs:
+  run-tomart:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.x" # Use the desired Python version
+
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Create data.txt with secret value
+      env:
+        DATA_SECRET: ${{ secrets.DATA }}
+      run: echo "$DATA_SECRET" > data.txt
+
+    - name: Run main.py
+      run: python3 main.py
