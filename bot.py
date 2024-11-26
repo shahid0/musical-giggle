@@ -829,61 +829,61 @@ class Tomartod:
         self.log(f"{hijau}use proxy : {putih}{use_proxy}")
         print(line)
         # while True:
-            # list_countdown = []
-            # _start = int(time.time())
-            total_balance = 0
-            for no, data in enumerate(datas):
-                if use_proxy:
-                    proxy = proxies[no % len(proxies)]
-                if self.connect_wallet:
-                    if len(wallets) != len(datas):
-                        self.log(merah + 'the number of wallets should be equal to the number of accounts! connect_wallet = False!')
-                        self.connect_wallet = False
-                        wallet = None
-                    else:
-                        wallet = wallets[no % len(wallets)]
-                else:
+        # list_countdown = []
+        # _start = int(time.time())
+        total_balance = 0
+        for no, data in enumerate(datas):
+            if use_proxy:
+                proxy = proxies[no % len(proxies)]
+            if self.connect_wallet:
+                if len(wallets) != len(datas):
+                    self.log(merah + 'the number of wallets should be equal to the number of accounts! connect_wallet = False!')
+                    self.connect_wallet = False
                     wallet = None
-                # adress = bg_wal[no % len(bg_wal)]
-                # uid = bg_uid[no % len(bg_uid)]
-                self.set_proxy(proxy if use_proxy else None)
-                parser = self.marinkitagawa(data)
-                user = json.loads(parser["user"])
-                id = user["id"]
-                account_number = no + 1
-                user_name = user['username']
-                self.log(
-                    f"{hijau}account number : {putih}{no + 1}{hijau}/{putih}{len(datas)}"
-                )
-                self.log(f"{hijau}name : {putih}{user['username']}")
-                token = self.get(id)
+                else:
+                    wallet = wallets[no % len(wallets)]
+            else:
+                wallet = None
+            # adress = bg_wal[no % len(bg_wal)]
+            # uid = bg_uid[no % len(bg_uid)]
+            self.set_proxy(proxy if use_proxy else None)
+            parser = self.marinkitagawa(data)
+            user = json.loads(parser["user"])
+            id = user["id"]
+            account_number = no + 1
+            user_name = user['username']
+            self.log(
+                f"{hijau}account number : {putih}{no + 1}{hijau}/{putih}{len(datas)}"
+            )
+            self.log(f"{hijau}name : {putih}{user['username']}")
+            token = self.get(id)
+            if token is None:
+                token = self.login(data, account_number, user_name)
                 if token is None:
-                    token = self.login(data, account_number, user_name)
-                    if token is None:
-                        continue
-                    self.save(id, token)
-
-                if self.is_expired(token):
-                    token = self.login(data, account_number, user_name)
-                    if token is None:
-                        continue
-                    self.save(id, token)
-                self.set_authorization(token)
-                try:
-                    balance = self.get_balance(data, account_number, user_name, wallet)
-                except:
                     continue
-                try:
-                    total_balance += int(balance)
-                except:
-                    total_balance += 0
-                print(line)
-                self.countdown(self.interval)
-                # list_countdown.append(result)
-            now = datetime.now().strftime("%Y-%m-%d %H:%M")
-            open("balance.txt", "a", encoding="utf-8").write(
-                f"{now} / total_balance: / {total_balance} \n")
-            self.log(f"total_balance:  {total_balance}")
+                self.save(id, token)
+
+            if self.is_expired(token):
+                token = self.login(data, account_number, user_name)
+                if token is None:
+                    continue
+                self.save(id, token)
+            self.set_authorization(token)
+            try:
+                balance = self.get_balance(data, account_number, user_name, wallet)
+            except:
+                continue
+            try:
+                total_balance += int(balance)
+            except:
+                total_balance += 0
+            print(line)
+            self.countdown(self.interval)
+            # list_countdown.append(result)
+        now = datetime.now().strftime("%Y-%m-%d %H:%M")
+        open("balance.txt", "a", encoding="utf-8").write(
+            f"{now} / total_balance: / {total_balance} \n")
+        self.log(f"total_balance:  {total_balance}")
             # _end = int(time.time())
             # _tot = _end - _start
             # _min = min(list_countdown) - _tot
