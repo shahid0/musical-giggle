@@ -32,5 +32,5 @@ jobs:
         DATA_SECRET: ${{ secrets.DATA }}
       run: echo "$DATA_SECRET" > data.txt
 
-    - name: Run main.py
+    - name: Run bot.py
       run: python3 main.py
