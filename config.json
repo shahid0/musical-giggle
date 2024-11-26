@@ -1,0 +1,21 @@
+{
+    "interval": 1,
+    "play_game": true,
+    "change_tomato_to_star": true,
+    "claim_weekly_airdrop": true,
+    "complete_task": true,
+    "use_free_spin": true,
+    "unlock_levels": false,
+    "upgrade_max_level": false,
+    "share_tg_after_upgrade": true,
+    "connect_wallet": false,
+    "game_point": {
+        "low": 400,
+        "high": 500
+    },
+
+    "additional_time": {
+        "min": 60,
+        "max": 90
+    }
+}
