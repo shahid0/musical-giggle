@@ -887,8 +887,8 @@ class Tomartod:
             # _end = int(time.time())
             # _tot = _end - _start
             # _min = min(list_countdown) - _tot
-            wait = random.randint(1800, 3600)
-            self.countdown(wait)
+            # wait = random.randint(1800, 3600)
+            # self.countdown(wait)
 
 
 if __name__ == "__main__":
