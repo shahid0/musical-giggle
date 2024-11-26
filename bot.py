@@ -880,10 +880,10 @@ class Tomartod:
             print(line)
             self.countdown(self.interval)
             # list_countdown.append(result)
-        now = datetime.now().strftime("%Y-%m-%d %H:%M")
-        open("balance.txt", "a", encoding="utf-8").write(
+            now = datetime.now().strftime("%Y-%m-%d %H:%M")
+            open("balance.txt", "a", encoding="utf-8").write(
             f"{now} / total_balance: / {total_balance} \n")
-        self.log(f"total_balance:  {total_balance}")
+            self.log(f"total_balance:  {total_balance}")
             # _end = int(time.time())
             # _tot = _end - _start
             # _min = min(list_countdown) - _tot
