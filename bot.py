@@ -349,7 +349,7 @@ class Tomartod:
             return None, None
 
     def check_balance_now(self, token):
-        url = "https://api-web.tomarket.ai/tomarket-game/v1/token/balance"
+        url = "https://api-web.tomarket.ai/tomarket-game/v1/user/balance"
         data = json.dumps({"init_data": token, "language_code": "ru"})
         res = self.http(url, self.headers, data)
         # print(res.status_code)
