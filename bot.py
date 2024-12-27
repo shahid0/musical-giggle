@@ -663,6 +663,8 @@ class Tomartod:
             if self.play_game:
                 self.log(f"{hijau}auto play game is enable!")
                 play_pass = data.get("play_passes")
+                self.log(f"{hijau}{data['play_passes']}!")
+                
                 self.log(f"{hijau}game ticket : {putih}{play_pass}")
                 if int(play_pass) > 0:
                     self.play_game_func(play_pass)
